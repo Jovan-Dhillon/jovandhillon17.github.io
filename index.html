@@ -1330,12 +1330,15 @@ const CONTENT = {
       year: "2025",
       desc: "Own domain plumbed through iCloud Custom Email. Professional addressing without adding another mailbox to manage.",
     },
+  ],
+
+  publications: [
     {
-      num: "04",
-      title: "ApprenticeWatch Feature",
-      kind: "Publications",
+      title: "What Starting My IT Apprenticeship Taught Me",
+      outlet: "ApprenticeWatch",
+      type: "Article",
       year: "2025",
-      desc: "Published reflection on starting an IT apprenticeship: what actually helped, what to expect, what nobody warns you about.",
+      desc: "Published reflection on starting an IT apprenticeship: what actually helped, what to expect, and what nobody warns you about.",
       href: "https://apprenticewatch.com/resources/what-starting-my-it-apprenticeship-taught-me",
     },
   ],
@@ -1379,6 +1382,7 @@ function Brutalist() {
   <a href="#work">Work</a>
   <a href="#stack">Stack</a>
   <a href="#projects">Projects</a>
+  <a href="#publications">Publications</a>
   <a href="#contact">Contact</a>
 
 <button
@@ -1424,7 +1428,7 @@ aria-label="Toggle dark mode"
             </div>
             <div className="br-info-card">
               <div className="k">Projects live</div>
-              <div className="v">04</div>
+              <div className="v">03</div>
             </div>
           </div>
         </div>
@@ -1522,9 +1526,27 @@ aria-label="Toggle dark mode"
         </div>
       </section>
 
-      <section className="br-section">
+      <section className="br-section" id="publications">
         <div className="br-section__head">
           <span className="br-section__num">05</span>
+          <h2 className="br-section__title">Publications.</h2>
+          <span className="br-section__tag">articles / features</span>
+        </div>
+        <div className="br-projects">
+          {C.publications.map((p, i) => (
+            <a key={i} href={p.href || '#'} target={p.href ? '_blank' : '_self'} rel="noopener" className="br-project">
+              <div className="br-project__meta"><span>{p.outlet} · {p.type}</span><span>{p.year}</span></div>
+              <h3 className="br-project__title">{p.title}</h3>
+              <p className="br-project__desc">{p.desc}</p>
+              <span className="br-project__arrow">{p.href ? 'READ →' : 'COMING SOON'}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="br-section">
+        <div className="br-section__head">
+          <span className="br-section__num">06</span>
           <h2 className="br-section__title">Right Now.</h2>
           <span className="br-section__tag">updated · April 2026</span>
         </div>
