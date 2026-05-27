@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jovan Dhillon — Technical Services Engineer</title>
+<title>jovandhillon.com</title>
 <meta name="description" content="Technical Services Engineer. Microsoft 365, Entra ID, Intune, UniFi, and Apple Enthusiast. Warwickshire, UK.">
 <link rel="icon" href="/images/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="/images/favicon.png">
@@ -14,7 +14,7 @@
 
 <style>
 /* ============================================================
-   jovandhillon.com — five self-contained variations.
+   jovandhillon.com: five self-contained variations.
    No design system. Each variation is its own world.
    ============================================================ */
 
@@ -26,7 +26,7 @@ button { font: inherit; cursor: pointer; border: 0; background: transparent; col
 img { max-width: 100%; display: block; }
 
 /* ═══════════════════════════════════════════════════════════
-   V1 — NEO-BRUTALIST
+   V1: NEO-BRUTALIST
 ═══════════════════════════════════════════════════════════ */
 
 .v-brutalist{
@@ -50,7 +50,7 @@ background .35s ease,
 color .35s ease;
 }
 
-/* LIGHT MODE — soft Apple-ish white + royal blue */
+/* LIGHT MODE: soft Apple-ish white + royal blue */
 .v-brutalist.light-mode{
 --bg:#ffffff;
 --fg:#111827;
@@ -471,7 +471,7 @@ margin-right:8px;
 .br-footer__row a:hover { color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════
-   V2 — DASHBOARD (dataviz)
+   V2: DASHBOARD (dataviz)
    Cool blue/cyan, dense grid, charts.
    ═══════════════════════════════════════════════════════════ */
 .v-dashboard {
@@ -682,7 +682,7 @@ margin-right:8px;
 .db-footer a:hover { color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════
-   V3 — AMBIENT (generative, moody)
+   V3: AMBIENT (generative, moody)
    Deep purples, cursor-reactive canvas, slow fades.
    ═══════════════════════════════════════════════════════════ */
 .v-ambient {
@@ -884,7 +884,7 @@ margin-right:8px;
 .am-footer__row a:hover { color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════
-   V4 — EDITORIAL SERIF (NYT / Are.na)
+   V4: EDITORIAL SERIF (NYT / Are.na)
    Warm cream + rust, serif, drop caps, marquee.
    ═══════════════════════════════════════════════════════════ */
 .v-editorial {
@@ -1074,7 +1074,7 @@ margin-right:8px;
 .ed-footer__row a:hover { color: var(--accent); }
 
 /* ═══════════════════════════════════════════════════════════
-   V5 — TERMINAL CLI
+   V5: TERMINAL CLI
    Green on black (phosphor), typing effect, ASCII.
    ═══════════════════════════════════════════════════════════ */
 .v-cli {
@@ -1251,7 +1251,7 @@ margin-right:8px;
 <div id="root"></div>
 
 <script>
-// jovandhillon.com — shared content data
+// jovandhillon.com: shared content data
 // Exported to window so all variation scripts can read it.
 
 const CONTENT = {
@@ -1270,7 +1270,7 @@ const CONTENT = {
       { t: "built quietly,", em: true },
       { t: "properly." },
     ],
-    lead: "I'm Jovan. I help organisations run cleaner, calmer IT — Microsoft 365, Entra ID, Intune, UniFi networks, and the Apple side of the fleet. Currently a Technical Services Engineer fresh off a Distinction-level Level 3 apprenticeship.",
+    lead: "I'm Jovan. I help organisations run cleaner, calmer IT: Microsoft 365, Entra ID, Intune, UniFi networks, and the Apple side of the fleet. Currently a Technical Services Engineer fresh off a Distinction-level Level 3 apprenticeship.",
   },
 
   quickFacts: [
@@ -1347,7 +1347,7 @@ const CONTENT = {
   ],
 
   now: [
-    "Working hands-on as a Technical Services Engineer at an MSP — tickets, projects, installs, the full picture.",
+    "Working hands-on as a Technical Services Engineer at an MSP: tickets, projects, installs, the full picture.",
     "Deepening Entra ID, Intune, and Conditional Access Knowledge. Policy-based device management is where modern IT actually happens.",
   ],
 
@@ -1368,7 +1368,7 @@ window.CONTENT = CONTENT;
 </script>
 
 <script type="text/babel">
-// jovandhillon.com — all five variations in one file.
+// jovandhillon.com: all five variations in one file.
 const { useState, useEffect, useRef } = React;
 const C = window.CONTENT;
 
@@ -1462,7 +1462,7 @@ aria-label="Toggle dark mode"
         </div>
         <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:32}}>
           <div style={{fontSize:'1.0625rem', lineHeight:1.7, fontWeight:500, maxWidth:'58ch'}}>
-            <p style={{marginBottom:16}}>I started through an IT apprenticeship and learned the job by doing the job — real tickets, real installs, real networks. </p>
+            <p style={{marginBottom:16}}>I started through an IT apprenticeship and learned the job by doing the job: real tickets, real installs, real networks. </p>
             <p style={{marginBottom:16}}>Day to day I'm on helpdesk tickets, M365 admin, Intune policy work, UniFi networks, and Apple device rollouts.</p>
             <p>Not loud about it, but I care a lot about helping others, encouraging apprenticeships, and managing issues that nobody notices.</p>
           </div>
@@ -1845,7 +1845,7 @@ function Ambient() {
               actually work.
             </h1>
             <p className="am-hero__lead">
-              I'm Jovan. I run the quiet layer — Microsoft 365, Entra ID, Intune, UniFi networks, and Apple fleets — so the people above it can stop worrying about IT and just work.
+              I'm Jovan. I run the quiet layer (Microsoft 365, Entra ID, Intune, UniFi networks, and Apple fleets) so the people above it can stop worrying about IT and just work.
             </p>
             <div className="am-hero__cta">
               <a href="mailto:hello@jovandhillon.com" className="am-btn am-btn--primary">Start a conversation →</a>
@@ -1856,14 +1856,14 @@ function Ambient() {
 
         <section className="am-section" id="about">
           <div className="am-section__head">
-            <div className="am-section__eyebrow">01 — About</div>
+            <div className="am-section__eyebrow">01 · About</div>
             <h2 className="am-section__title">A calm technical temperament, built on <em>real hands-on work</em>.</h2>
           </div>
           <div className="am-cards">
             {[
               {num:'01',name:'Apprentice-trained',desc:'Level 3 IT Apprenticeship completed with a Distinction. Learned the craft by shipping real work to real users.',tag:'Certified 2025'},
               {num:'02',name:'MSP-seasoned',desc:'Day-to-day across tickets, installs, client infrastructure, and project work inside a managed-services environment.',tag:'Active role'},
-              {num:'03',name:'Cyber-aware',desc:'Security-first mindset baked in from the start — policy over patching, least-privilege by default, documented trails.',tag:'Always on'},
+              {num:'03',name:'Cyber-aware',desc:'Security-first mindset baked in from the start: policy over patching, least-privilege by default, documented trails.',tag:'Always on'},
             ].map(c => (
               <div key={c.num} className="am-card">
                 <div className="am-card__num">{c.num}</div>
@@ -1877,7 +1877,7 @@ function Ambient() {
 
         <section className="am-section" id="work">
           <div className="am-section__head">
-            <div className="am-section__eyebrow">02 — Capabilities</div>
+            <div className="am-section__eyebrow">02 · Capabilities</div>
             <h2 className="am-section__title">Six things I do, <em>properly</em>.</h2>
           </div>
           <div className="am-stack-list">
@@ -1894,7 +1894,7 @@ function Ambient() {
 
         <section className="am-section" id="stack">
           <div className="am-section__head">
-            <div className="am-section__eyebrow">03 — Toolkit</div>
+            <div className="am-section__eyebrow">03 · Toolkit</div>
             <h2 className="am-section__title"><em>Daily rotation</em>, and what's next.</h2>
           </div>
           <div className="am-stack-list">
@@ -1911,7 +1911,7 @@ function Ambient() {
 
         <section className="am-section" id="projects">
           <div className="am-section__head">
-            <div className="am-section__eyebrow">04 — Projects</div>
+            <div className="am-section__eyebrow">04 · Projects</div>
             <h2 className="am-section__title">Small, specific, <em>built for keeps</em>.</h2>
           </div>
           <div className="am-projects">
@@ -1928,7 +1928,7 @@ function Ambient() {
 
         <section className="am-section">
           <div className="am-section__head">
-            <div className="am-section__eyebrow">05 — Now</div>
+            <div className="am-section__eyebrow">05 · Now</div>
             <h2 className="am-section__title">What I'm <em>focused on</em> this month.</h2>
           </div>
           <ul className="am-now-list">
@@ -1977,7 +1977,7 @@ function EditorialSerif() {
           Modern IT, built <em>quietly</em>, built properly.
         </h1>
         <p className="ed-hero__deck">
-          A Technical Services Engineer writing about the unglamorous craft of Microsoft 365, Entra ID, Intune, UniFi networks, and Apple fleets — where the good work is the work nobody notices.
+          A Technical Services Engineer writing about the unglamorous craft of Microsoft 365, Entra ID, Intune, UniFi networks, and Apple fleets, where the good work is the work nobody notices.
         </p>
         <div className="ed-hero__meta">
           <span>By <a href="#">Jovan Dhillon</a></span>
@@ -2009,7 +2009,7 @@ function EditorialSerif() {
           <h2 className="ed-article__title">An <em>apprenticeship</em> in doing things carefully.</h2>
         </div>
         <div className="ed-columns">
-          <p>I came into IT through an apprenticeship because it seemed honest — learn the job while doing the job. Three years later, Level 3 complete with a Distinction, I'm still convinced it was the right door.</p>
+          <p>I came into IT through an apprenticeship because it seemed honest: learn the job while doing the job. Three years later, Level 3 complete with a Distinction, I'm still convinced it was the right door.</p>
           <p>The work itself is quiet. It's a calm helpdesk. A tidy Conditional Access policy. A UniFi network with sensible VLANs. A MacBook arriving with Intune already configured, so the new joiner just opens it and works.</p>
           <p>Most of what I do will never be celebrated. Nobody writes case studies about the ticket that didn't happen because the policy was right. That's fine. The goal is fewer interruptions, not louder ones.</p>
           <p>I write occasionally for <a href="https://apprenticewatch.com/resources/what-starting-my-it-apprenticeship-taught-me" target="_blank" rel="noopener" style={{color:'var(--accent)',borderBottom:'1px solid currentColor'}}>ApprenticeWatch</a> about what early-career IT actually feels like. Less corporate brochure, more honest diary entry.</p>
@@ -2080,7 +2080,7 @@ function EditorialSerif() {
       <footer className="ed-footer" id="contact">
         <div className="ed-footer__giant"><em>&</em> hello,</div>
         <p style={{fontSize:'1.125rem', lineHeight:1.6, maxWidth:'50ch', marginBottom:28, color:'var(--fg-muted)'}}>
-          If any of this resonates — a project, a role, a conversation — I'd love to hear from you.
+          If any of this resonates (a project, a role, a conversation), I'd love to hear from you.
         </p>
         <div style={{display:'flex',gap:32,flexWrap:'wrap', fontSize:'1.0625rem', fontStyle:'italic', marginBottom:48}}>
           <a href="mailto:hello@jovandhillon.com" style={{borderBottom:'1px solid var(--accent)', paddingBottom:2}}>hello@jovandhillon.com</a>
@@ -2143,7 +2143,7 @@ function CLI() {
           <div><span className="c1">quals</span>     : <span className="c2">L3 IT Apprenticeship · Distinction</span></div>
           <div><span className="c1">status</span>    : <span className="c3">available · responding · building</span></div>
           <div style={{marginTop:10, color:'var(--fg)', lineHeight:1.7}}>
-            Hi. I run quiet, well-built IT for real businesses — Microsoft 365, Entra ID, Intune, UniFi, and Apple fleets. Fresh off a Distinction-level apprenticeship. MSP-trained. Still actively learning. Prefer policy over patching, documentation over heroics, and properly labelled cables.
+            Hi. I run quiet, well-built IT for real businesses: Microsoft 365, Entra ID, Intune, UniFi, and Apple fleets. Fresh off a Distinction-level apprenticeship. MSP-trained. Still actively learning. Prefer policy over patching, documentation over heroics, and properly labelled cables.
           </div>
         </div>
 
