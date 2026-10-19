@@ -2,7 +2,7 @@
 
 A practical operator's guide for picking this project up cold.
 
-*Last updated: September 2026.*
+*Last updated: October 2026.*
 
 ---
 
@@ -56,7 +56,7 @@ The `CNAME` file in the repo (`jovandhillon.com`) is a legacy GitHub Pages artif
 │   ├── favicon.png         ← 512×512, modern browsers
 │   └── apple-touch-icon.png← 180×180, iOS home screen
 ├── sitemap.xml             ← single URL, submitted to Search Console
-├── robots.txt              ← Sitemap line only (crawler rules come from Cloudflare)
+├── robots.txt              ← crawler rules + Sitemap line (self-contained)
 ├── CNAME                   ← legacy GitHub Pages marker (harmless)
 ├── README.md               ← GitHub profile readme (not used by the site)
 ├── LICENSE
@@ -177,7 +177,7 @@ If it prints a number, the object is valid. A `SyntaxError` means do not push.
 ## 7. Things to know / known quirks
 
 - **Google Analytics 4 is installed, gated behind consent.** The `gtag.js` snippet sits near the top of `<head>` in `index.html` (search for `gtag/js`), reporting to property **`G-7WM9PC1BBQ`**. It is a plain `<script>`, not a `text/babel` block, so it runs before React and is unaffected by the JSX transpile. See section 9 for the consent wiring.
-- **`robots.txt` is assembled at the edge, not just served from the repo.** Cloudflare **prepends** its managed block (Content Signals plus `Disallow` rules for ten AI crawlers) to the repo file rather than being replaced by it. The repo file therefore holds only the `Sitemap:` line. Do not paste the crawler rules into it: they arrive automatically and stay current, and duplicating them yields two identical groups in the served file. See section 10.
+- **`robots.txt` carries its own crawler rules, and they do not update themselves.** Cloudflare used to prepend a managed block supplying them; that injection stopped between September and October 2026, which left the site serving no crawler rules at all until it was caught. The rules now live in the repo file. Re-check them against Cloudflare's managed list occasionally, and see section 10 before changing anything.
 - **In-browser Babel is heavy.** Every visitor downloads React's *development* builds plus the full Babel compiler (~3MB) and transpiles JSX on their device. Acceptable for a personal site, but the obvious optimisation is to introduce a build step (Vite) and serve pre-compiled, minified production React.
 - **React DEV build, not production.** See above. No `react.production.min.js` is referenced.
 - **Hard dependency on `unpkg.com`.** If unpkg is unavailable, the site won't render. Mitigation would be self-hosting React/Babel.
@@ -202,6 +202,18 @@ If it prints a number, the object is valid. A `SyntaxError` means do not push.
 - **A URL returns 200 but the wrong content** → Cloudflare Pages serves `index.html` for any unknown path, so a missing file looks like a success. Check the body and the `content-type`, never the status code alone.
 - **Favicon didn't update** → browser cache. Visit `/images/favicon.png` directly to confirm the new file is being served, then hard-refresh.
 - **No data in Google Analytics** → check the cookie banner. Analytics only fires after a visitor clicks **Accept**; a `Reject` or an untouched banner means no hits by design. In DevTools, `localStorage.getItem('jd-cookie-consent')` shows the stored choice.
+
+### Periodic check: things that rot without a commit
+
+Most of this site only changes when someone pushes. Two things do not, because they depend on Cloudflare's behaviour at the edge rather than on the repo. Both have broken silently before. Worth running every few months:
+
+```bash
+# crawler rules reaching crawlers? expect 10, not 0 and not 20 (see section 10)
+curl -s https://jovandhillon.com/robots.txt | grep -cE "^User-agent:"
+
+# sitemap still real XML, not the index.html fallback?
+curl -sI https://jovandhillon.com/sitemap.xml | grep -i content-type   # want application/xml
+```
 
 ---
 
@@ -249,17 +261,30 @@ If that is `application/xml`, the error is stale. Press **Refresh** on the sitem
 
 ### robots.txt
 
-The served file has **two sources**, and this trips people up:
+**The rules live in the repo file and are a frozen snapshot. They do not update themselves.**
 
-1. **Cloudflare's managed block**, prepended at the edge. This is the Content Signals notice plus `Disallow: /` for Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot, CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot and meta-externalagent. It is **not** in this repo and it updates itself as Cloudflare revises the list.
-2. **`robots.txt` in the repo**, appended after it. It holds only the `Sitemap:` line.
+`robots.txt` at the repo root carries the Content Signals notice (`search=yes, ai-train=no, use=reference`), `Disallow: /` for ten AI crawlers (Amazonbot, Applebot-Extended, Bytespider, CCBot, ClaudeBot, CloudflareBrowserRenderingCrawler, Google-Extended, GPTBot, meta-externalagent) and the `Sitemap:` line.
 
-A repo `robots.txt` does **not** override the managed block, it is concatenated after it. So do not copy the crawler rules into the repo file: you get two identical groups in the served output. (This was tried, and reverted, in September 2026.)
+#### Why it is arranged this way
 
-Always check what is actually served rather than reading the repo file alone:
+This has changed once already, so the history matters:
+
+1. **Originally** there was no repo `robots.txt`. Cloudflare served a managed block at the edge, and the Pages fallback appended the whole of `index.html` after it. Malformed, but the rules were live.
+2. **September 2026**, a repo file was added mirroring the rules. Cloudflare still prepended its block, so every rule appeared **twice**. The file was trimmed to just the `Sitemap:` line, relying on the injection for the rules.
+3. **October 2026**, that reliance broke. Cloudflare had **stopped prepending** the managed block, on both the apex and the `pages.dev` URL, uncached, for every user agent. The served file was byte-identical to the repo file, so the site was serving **no crawler rules and no Content Signals reservation at all**. Nothing in the repo had changed; the edge behaviour had. The rules were moved back into the repo file.
+
+#### What this means for you
+
+- **Do not assume the edge supplies anything.** It did, then it stopped, silently, with no commit and no deploy.
+- **If Cloudflare's managed robots.txt is ever re-enabled**, its block is prepended again and every rule in the repo file appears twice. Either trim the repo file back to the `Sitemap:` line at that point, or leave the managed feature off.
+- **Re-check the crawler list periodically** against [Cloudflare's managed robots.txt docs](https://developers.cloudflare.com/bots/additional-configurations/managed-robots-txt/) and add new entries by hand. The repo file will not track their additions.
+
+#### Verifying
+
+Always check what is served, never just what is in the file:
 
 ```bash
-curl -s https://jovandhillon.com/robots.txt
+curl -s https://jovandhillon.com/robots.txt | grep -cE "^User-agent:"   # expect 10
 ```
 
-Before the repo file existed, that URL served the managed block **followed by the whole of `index.html`**, because the Pages fallback returned the index for the unknown path. Crawlers skipped the unparseable HTML, so it worked, but the file was malformed.
+A `0` means the rules are not reaching crawlers. A `20` means the managed block is being prepended again and everything is duplicated.
